@@ -37,6 +37,35 @@ app.get('/return_value', (req, res) => {
     });
 });
 
+// Endpoint to update "return_value" in data.json
+app.post('/update_return_value', (req, res) => {
+    const newValue = req.body.new_value;
+
+    if (!newValue) {
+        res.status(400).json({ error: 'new_value not provided in the request' });
+        return;
+    }
+
+    fs.readFile('data.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+        const techData = JSON.parse(data).tech || {}; // Ensure tech key exists
+        techData.return_value = newValue;
+
+        fs.writeFile('data.json', JSON.stringify({ tech: techData }), (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Internal Server Error' });
+                return;
+            }
+            res.json({ message: 'return_value updated successfully' });
+        });
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
