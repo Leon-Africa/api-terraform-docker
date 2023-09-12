@@ -1,0 +1,37 @@
+# Dependency directories
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Optional: Lock files
+package-lock.json
+yarn.lock
+
+# Environment-specific files
+.env
+.env.local
+.env.*.local
+
+# Compiled output
+dist/
+build/
+
+# Logs and debugging
+logs/
+*.log
+npm-debug.log*
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+*.swp
+*~
+*.bak
