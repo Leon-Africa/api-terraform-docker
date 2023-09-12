@@ -23,6 +23,20 @@ app.get('/server_info', (req, res) => {
     });
 });
 
+// Endpoint to get "return_value" from data.json
+app.get('/return_value', (req, res) => {
+    fs.readFile('data.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+        const techData = JSON.parse(data).tech || {}; // Ensure tech key exists
+        const returnValue = techData.return_value;
+        res.json({ return_value: returnValue });
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
